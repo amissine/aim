@@ -23,16 +23,22 @@ export default function Home() {
           <a href="https://nextjs.org/docs" className="card">
             <h3>What Is It? &rarr;</h3>
             <p>
-    Stellar Help Exchange (HEX) runs on Stellar Network.{' '}
-    It is a place where Stellar users exchange all kinds of help{' '}
-    for rewards. If a user does not get the help she paid for,{' '}
+    Stellar Help Exchange (HEX) runs on Stellar Network.
+    It is a place where Stellar users exchange all kinds of help
+    for rewards. If a user does not get the help she paid for,
     she gets her payment back.
             </p>
           </a>
 
           <a href="https://nextjs.org/learn" className="card">
             <h3>How Does It Work? &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
+            <p>
+    Users make help offers and help requests, other users take them.
+    When a user takes a request, the user gets paid by the maker
+    and must provide the requested help in a timely manner. Wnen a user
+    takes a help offer, she pays for the help right away. Click here for
+    more...
+            </p>
           </a>
 
           <a
@@ -40,16 +46,20 @@ export default function Home() {
             className="card"
           >
             <h3>Why Should I Care? &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
+            <p>
+    Join Stellar HEX, check open offers and requests. Make an offer or a request.
+    Then see for yourself. Click here to join the discussion on Discord...
+            </p>
           </a>
 
           <a
             href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
             className="card"
           >
-            <h3>Ok, How Do I Join Stellar HEX? &rarr;</h3>
+            <h3>Ok, How Do I Join It? &rarr;</h3>
             <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
+    First, add Stellar wallet to your browser. Then get some HEXA and you're in! 
+    The next page will help you do so - click here to open it!
             </p>
           </a>
         </div>
@@ -147,7 +157,7 @@ export default function Home() {
 
         .grid {
           display: flex;
-          align-items: center;
+          align-items: baseline;
           justify-content: center;
           flex-wrap: wrap;
 
