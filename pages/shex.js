@@ -1,4 +1,6 @@
 import Head from 'next/head'
+// See also:
+// https://nextjs.org/blog/styling-next-with-styled-jsx
 
 export default function Home() {
   return (
@@ -58,8 +60,8 @@ export default function Home() {
           >
             <h3>Ok, How Do I Join It? &rarr;</h3>
             <p>
-    First, add Stellar wallet to your browser. Then get some HEXA and you're in! 
-    The next page will help you do so - click here to open it!
+    Add Stellar wallet to your browser, get the assets - and you're in! 
+    Click here to do it...
             </p>
           </a>
         </div>

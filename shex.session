@@ -32,6 +32,8 @@ set shiftwidth=2
 set suffixes=.bak,~,.o,.h,.info,.swp,.obj,.snap
 set tabstop=2
 set window=6343460812639698944
+set winminheight=0
+set winminwidth=0
 let s:so_save = &g:so | let s:siso_save = &g:siso | setg so=0 siso=0 | setl so=-1 siso=-1
 let v:this_session=expand("<sfile>:p")
 silent only
@@ -50,7 +52,13 @@ badd +1 .gitignore
 badd +1 next.config.js
 badd +1 pages/shex.js
 badd +1 styles/global.css
-badd +0 pages/_app.js
+badd +1 pages/_app.js
+badd +1 styles/shex.module.css
+badd +1 components/layout.js
+badd +2 styles/utils.module.css
+badd +2 styles/tmp.css
+badd +1 styles/shex.css
+badd +1 pages/index-original.js
 argglobal
 %argdel
 $argadd package.json
@@ -86,11 +94,11 @@ set winminwidth=0
 set winwidth=1
 exe 'vert 1resize ' . ((&columns * 29 + 89) / 179)
 exe 'vert 2resize ' . ((&columns * 87 + 89) / 179)
-exe '3resize ' . ((&lines * 7 + 24) / 49)
+exe '3resize ' . ((&lines * 15 + 24) / 49)
 exe 'vert 3resize ' . ((&columns * 61 + 89) / 179)
-exe '4resize ' . ((&lines * 14 + 24) / 49)
+exe '4resize ' . ((&lines * 15 + 24) / 49)
 exe 'vert 4resize ' . ((&columns * 61 + 89) / 179)
-exe '5resize ' . ((&lines * 23 + 24) / 49)
+exe '5resize ' . ((&lines * 14 + 24) / 49)
 exe 'vert 5resize ' . ((&columns * 61 + 89) / 179)
 argglobal
 balt styles/global.css
@@ -223,7 +231,7 @@ normal! 0
 wincmd w
 argglobal
 if bufexists(fnamemodify("styles/global.css", ":p")) | buffer styles/global.css | else | edit styles/global.css | endif
-balt .gitignore
+balt styles/tmp.css
 setlocal noautoindent
 setlocal backupcopy=
 setlocal nobinary
@@ -344,11 +352,11 @@ setlocal nowinfixheight
 setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
-let s:l = 1 - ((0 * winheight(0) + 23) / 46)
+let s:l = 28 - ((27 * winheight(0) + 23) / 46)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 1
+keepjumps 28
 normal! 0
 wincmd w
 argglobal
@@ -474,11 +482,11 @@ setlocal nowinfixheight
 setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
-let s:l = 1 - ((0 * winheight(0) + 3) / 7)
+let s:l = 2 - ((1 * winheight(0) + 7) / 15)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 1
+keepjumps 2
 normal! 0
 wincmd w
 argglobal
@@ -604,7 +612,7 @@ setlocal nowinfixheight
 setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
-let s:l = 1 - ((0 * winheight(0) + 7) / 14)
+let s:l = 1 - ((0 * winheight(0) + 7) / 15)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
@@ -734,7 +742,7 @@ setlocal nowinfixheight
 setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
-let s:l = 1 - ((0 * winheight(0) + 11) / 23)
+let s:l = 1 - ((0 * winheight(0) + 7) / 14)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
@@ -743,16 +751,16 @@ normal! 0
 wincmd w
 exe 'vert 1resize ' . ((&columns * 29 + 89) / 179)
 exe 'vert 2resize ' . ((&columns * 87 + 89) / 179)
-exe '3resize ' . ((&lines * 7 + 24) / 49)
+exe '3resize ' . ((&lines * 15 + 24) / 49)
 exe 'vert 3resize ' . ((&columns * 61 + 89) / 179)
-exe '4resize ' . ((&lines * 14 + 24) / 49)
+exe '4resize ' . ((&lines * 15 + 24) / 49)
 exe 'vert 4resize ' . ((&columns * 61 + 89) / 179)
-exe '5resize ' . ((&lines * 23 + 24) / 49)
+exe '5resize ' . ((&lines * 14 + 24) / 49)
 exe 'vert 5resize ' . ((&columns * 61 + 89) / 179)
 tabnext
 edit pages/shex.js
 argglobal
-balt next.config.js
+balt styles/shex.module.css
 setlocal autoindent
 setlocal backupcopy=
 setlocal nobinary
@@ -873,13 +881,13 @@ setlocal nowinfixheight
 setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
-let s:l = 40 - ((28 * winheight(0) + 23) / 47)
+let s:l = 4 - ((3 * winheight(0) + 23) / 47)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 40
-normal! 08|
-tabnext 1
+keepjumps 4
+normal! 0
+tabnext 2
 set stal=1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0
   silent exe 'bwipe ' . s:wipebuf
@@ -894,6 +902,7 @@ if filereadable(s:sx)
   exe "source " . fnameescape(s:sx)
 endif
 let &g:so = s:so_save | let &g:siso = s:siso_save
+nohlsearch
 doautoall SessionLoadPost
 unlet SessionLoad
 " vim: set ft=vim :
