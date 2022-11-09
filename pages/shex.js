@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Link from 'next/link';
 // See also:
 // https://nextjs.org/blog/styling-next-with-styled-jsx
 
@@ -28,7 +29,7 @@ export default function Home() {
     Stellar Help Exchange (HEX) runs on Stellar Network.
     It is a place where Stellar users exchange all kinds of help
     for rewards. If a user does not get the help she paid for,
-    she gets her payment back.
+    she gets her payment back. And it's FOSS...
             </p>
           </a>
 
@@ -50,20 +51,17 @@ export default function Home() {
             <h3>Why Should I Care? &rarr;</h3>
             <p>
     Join Stellar HEX, check open offers and requests. Make an offer or a request.
-    Then see for yourself. Click here to join the discussion on Discord...
+    Then see if you like it. Click here to join the discussion on Discord...
             </p>
           </a>
 
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className="card"
-          >
-            <h3>Ok, How Do I Join It? &rarr;</h3>
+          <Link href={'/posts/first-post'} className="card">
+            <h3>Ok, How Do I Join? &rarr;</h3>
             <p>
     Add Stellar wallet to your browser, get the assets - and you're in! 
-    Click here to do it...
+    Click here to do it now...
             </p>
-          </a>
+          </Link>
         </div>
       </main>
 
@@ -163,13 +161,13 @@ export default function Home() {
           justify-content: center;
           flex-wrap: wrap;
 
-          max-width: 900px;
+          max-width: 1400px;
           margin-top: 3rem;
         }
 
         .card {
           margin: 1rem;
-          flex-basis: 45%;
+          flex-basis: 20%;
           padding: 1.5rem;
           text-align: left;
           color: inherit;

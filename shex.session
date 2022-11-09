@@ -50,15 +50,20 @@ endif
 badd +1 package.json
 badd +1 .gitignore
 badd +1 next.config.js
-badd +1 pages/shex.js
+badd +68 pages/shex.js
 badd +1 styles/global.css
 badd +1 pages/_app.js
 badd +1 styles/shex.module.css
-badd +1 components/layout.js
-badd +2 styles/utils.module.css
+badd +11 components/layout.js
+badd +1 styles/utils.module.css
 badd +2 styles/tmp.css
 badd +1 styles/shex.css
 badd +1 pages/index-original.js
+badd +35 pages/index.js
+badd +0 pages/sandbox/shex.js
+badd +42 pages/posts/\[id].js
+badd +7 components/layout.module.css
+badd +0 pages/sandbox/shex.module.css
 argglobal
 %argdel
 $argadd package.json
@@ -352,12 +357,12 @@ setlocal nowinfixheight
 setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
-let s:l = 28 - ((27 * winheight(0) + 23) / 46)
+let s:l = 17 - ((16 * winheight(0) + 23) / 46)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 28
-normal! 0
+keepjumps 17
+normal! 03|
 wincmd w
 argglobal
 if bufexists(fnamemodify("pages/_app.js", ":p")) | buffer pages/_app.js | else | edit pages/_app.js | endif
@@ -758,9 +763,27 @@ exe 'vert 4resize ' . ((&columns * 61 + 89) / 179)
 exe '5resize ' . ((&lines * 14 + 24) / 49)
 exe 'vert 5resize ' . ((&columns * 61 + 89) / 179)
 tabnext
-edit pages/shex.js
+edit pages/sandbox/shex.js
+let s:save_splitbelow = &splitbelow
+let s:save_splitright = &splitright
+set splitbelow splitright
+wincmd _ | wincmd |
+vsplit
+1wincmd h
+wincmd w
+let &splitbelow = s:save_splitbelow
+let &splitright = s:save_splitright
+wincmd t
+let s:save_winminheight = &winminheight
+let s:save_winminwidth = &winminwidth
+set winminheight=0
+set winheight=1
+set winminwidth=0
+set winwidth=1
+exe 'vert 1resize ' . ((&columns * 89 + 89) / 179)
+exe 'vert 2resize ' . ((&columns * 89 + 89) / 179)
 argglobal
-balt styles/shex.module.css
+balt pages/posts/\[id].js
 setlocal autoindent
 setlocal backupcopy=
 setlocal nobinary
@@ -881,12 +904,146 @@ setlocal nowinfixheight
 setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
-let s:l = 4 - ((3 * winheight(0) + 23) / 47)
+let s:l = 66 - ((38 * winheight(0) + 23) / 46)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 4
-normal! 0
+keepjumps 66
+normal! 064|
+wincmd w
+argglobal
+if bufexists(fnamemodify("pages/sandbox/shex.module.css", ":p")) | buffer pages/sandbox/shex.module.css | else | edit pages/sandbox/shex.module.css | endif
+balt pages/shex.js
+setlocal noautoindent
+setlocal backupcopy=
+setlocal nobinary
+setlocal nobreakindent
+setlocal breakindentopt=
+setlocal bufhidden=
+setlocal buflisted
+setlocal buftype=
+setlocal nocindent
+setlocal cinkeys=0{,0},0),0],:,0#,!^F,o,O,e
+setlocal cinoptions=
+setlocal cinscopedecls=public,protected,private
+setlocal cinwords=if,else,while,do,for,switch
+setlocal colorcolumn=
+setlocal comments=s1:/*,mb:*,ex:*/
+setlocal commentstring=/*%s*/
+setlocal complete=.,w,b,u,t,i
+setlocal completefunc=
+setlocal nocopyindent
+setlocal cryptmethod=
+setlocal nocursorbind
+setlocal nocursorcolumn
+setlocal nocursorline
+setlocal cursorlineopt=both
+setlocal define=
+setlocal dictionary=
+setlocal nodiff
+setlocal equalprg=
+setlocal errorformat=
+setlocal expandtab
+if &filetype != 'css'
+setlocal filetype=css
+endif
+setlocal fillchars=
+setlocal fixendofline
+setlocal foldcolumn=0
+setlocal foldenable
+setlocal foldexpr=0
+setlocal foldignore=#
+setlocal foldlevel=0
+setlocal foldmarker={{{,}}}
+set foldmethod=marker
+setlocal foldmethod=marker
+setlocal foldminlines=1
+setlocal foldnestmax=20
+setlocal foldtext=foldtext()
+setlocal formatexpr=
+setlocal formatoptions=croql
+setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
+setlocal formatprg=
+setlocal grepprg=
+setlocal iminsert=0
+setlocal imsearch=-1
+setlocal include=^\\s*@import\\s\\+\\%(url(\\)\\=
+setlocal includeexpr=
+setlocal indentexpr=GetCSSIndent()
+setlocal indentkeys=0{,0},!^F,o,O
+setlocal noinfercase
+setlocal iskeyword=@,48-57,_,192-255,-
+setlocal keywordprg=
+setlocal nolinebreak
+setlocal nolisp
+setlocal lispwords=
+setlocal nolist
+setlocal listchars=
+setlocal makeencoding=
+setlocal makeprg=
+setlocal matchpairs=(:),{:},[:]
+setlocal modeline
+setlocal modifiable
+setlocal nrformats=bin,octal,hex
+set number
+setlocal number
+setlocal numberwidth=4
+setlocal omnifunc=csscomplete#CompleteCSS
+setlocal path=
+setlocal nopreserveindent
+setlocal nopreviewwindow
+setlocal quoteescape=\\
+setlocal noreadonly
+setlocal norelativenumber
+setlocal noscrollbind
+setlocal scrolloff=-1
+setlocal shiftwidth=2
+setlocal noshortname
+setlocal showbreak=
+setlocal sidescrolloff=-1
+setlocal signcolumn=auto
+setlocal nosmartindent
+setlocal softtabstop=0
+setlocal nospell
+setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
+setlocal spellfile=
+setlocal spelllang=en
+setlocal spelloptions=
+setlocal statusline=
+setlocal suffixesadd=
+setlocal swapfile
+setlocal synmaxcol=3000
+if &syntax != 'css'
+setlocal syntax=css
+endif
+setlocal tabstop=2
+setlocal tagcase=
+setlocal tagfunc=
+setlocal tags=
+setlocal termwinkey=
+setlocal termwinscroll=10000
+setlocal termwinsize=
+setlocal textwidth=0
+setlocal thesaurus=
+setlocal thesaurusfunc=
+setlocal noundofile
+setlocal undolevels=-123456
+setlocal virtualedit=
+setlocal wincolor=
+setlocal nowinfixheight
+setlocal nowinfixwidth
+setlocal wrap
+setlocal wrapmargin=0
+let s:l = 85 - ((1 * winheight(0) + 23) / 46)
+if s:l < 1 | let s:l = 1 | endif
+keepjumps exe s:l
+normal! zt
+keepjumps 85
+normal! 014|
+wincmd w
+2wincmd w
+exe 'vert 1resize ' . ((&columns * 89 + 89) / 179)
+exe 'vert 2resize ' . ((&columns * 89 + 89) / 179)
 tabnext 2
 set stal=1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0
@@ -902,7 +1059,6 @@ if filereadable(s:sx)
   exe "source " . fnameescape(s:sx)
 endif
 let &g:so = s:so_save | let &g:siso = s:siso_save
-nohlsearch
 doautoall SessionLoadPost
 unlet SessionLoad
 " vim: set ft=vim :
