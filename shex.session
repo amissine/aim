@@ -50,7 +50,7 @@ endif
 badd +1 package.json
 badd +1 .gitignore
 badd +1 next.config.js
-badd +68 pages/shex.js
+badd +1 pages/shex.js
 badd +1 styles/global.css
 badd +1 pages/_app.js
 badd +1 styles/shex.module.css
@@ -60,10 +60,12 @@ badd +2 styles/tmp.css
 badd +1 styles/shex.css
 badd +1 pages/index-original.js
 badd +35 pages/index.js
-badd +0 pages/sandbox/shex.js
+badd +1 pages/sandbox/shex.js
 badd +42 pages/posts/\[id].js
 badd +7 components/layout.module.css
-badd +0 pages/sandbox/shex.module.css
+badd +1 pages/sandbox/shex.module.css
+badd +127 pages/shex.module.css
+badd +0 pages/shex-join.js
 argglobal
 %argdel
 $argadd package.json
@@ -763,7 +765,7 @@ exe 'vert 4resize ' . ((&columns * 61 + 89) / 179)
 exe '5resize ' . ((&lines * 14 + 24) / 49)
 exe 'vert 5resize ' . ((&columns * 61 + 89) / 179)
 tabnext
-edit pages/sandbox/shex.js
+edit pages/shex-join.js
 let s:save_splitbelow = &splitbelow
 let s:save_splitright = &splitright
 set splitbelow splitright
@@ -783,7 +785,7 @@ set winwidth=1
 exe 'vert 1resize ' . ((&columns * 89 + 89) / 179)
 exe 'vert 2resize ' . ((&columns * 89 + 89) / 179)
 argglobal
-balt pages/posts/\[id].js
+balt pages/shex.module.css
 setlocal autoindent
 setlocal backupcopy=
 setlocal nobinary
@@ -904,17 +906,17 @@ setlocal nowinfixheight
 setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
-let s:l = 66 - ((38 * winheight(0) + 23) / 46)
+let s:l = 15 - ((14 * winheight(0) + 23) / 46)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 66
-normal! 064|
+keepjumps 15
+normal! 029|
 wincmd w
 argglobal
-if bufexists(fnamemodify("pages/sandbox/shex.module.css", ":p")) | buffer pages/sandbox/shex.module.css | else | edit pages/sandbox/shex.module.css | endif
-balt pages/shex.js
-setlocal noautoindent
+if bufexists(fnamemodify("pages/shex.js", ":p")) | buffer pages/shex.js | else | edit pages/shex.js | endif
+balt pages/sandbox/shex.module.css
+setlocal autoindent
 setlocal backupcopy=
 setlocal nobinary
 setlocal nobreakindent
@@ -928,8 +930,8 @@ setlocal cinoptions=
 setlocal cinscopedecls=public,protected,private
 setlocal cinwords=if,else,while,do,for,switch
 setlocal colorcolumn=
-setlocal comments=s1:/*,mb:*,ex:*/
-setlocal commentstring=/*%s*/
+setlocal comments=sO:*\ -,mO:*\ \ ,exO:*/,s1:/*,mb:*,ex:*/,://
+setlocal commentstring=//%s
 setlocal complete=.,w,b,u,t,i
 setlocal completefunc=
 setlocal nocopyindent
@@ -938,14 +940,14 @@ setlocal nocursorbind
 setlocal nocursorcolumn
 setlocal nocursorline
 setlocal cursorlineopt=both
-setlocal define=
+setlocal define=\\(^\\s*(*async\\s\\+function\\|(*function\\)\\|^\\s*\\(\\*\\|static\\|async\\|get\\|set\\|\\i\\+\\.\\)\\|^\\s*\\(\\ze\\i\\+\\)\\(([^)]*).*{$\\|\\s*[:=,]\\)\\|^\\s*\\(export\\s\\+\\|export\\s\\+default\\s\\+\\)*\\(var\\|let\\|const\\|function\\|class\\)\\|\\<as\\>
 setlocal dictionary=
 setlocal nodiff
 setlocal equalprg=
 setlocal errorformat=
 setlocal expandtab
-if &filetype != 'css'
-setlocal filetype=css
+if &filetype != 'javascript'
+setlocal filetype=javascript
 endif
 setlocal fillchars=
 setlocal fixendofline
@@ -967,12 +969,12 @@ setlocal formatprg=
 setlocal grepprg=
 setlocal iminsert=0
 setlocal imsearch=-1
-setlocal include=^\\s*@import\\s\\+\\%(url(\\)\\=
+setlocal include=
 setlocal includeexpr=
-setlocal indentexpr=GetCSSIndent()
-setlocal indentkeys=0{,0},!^F,o,O
+setlocal indentexpr=GetJavascriptIndent()
+setlocal indentkeys=0{,0},0),0],:,0#,!^F,o,O,e,0],0)
 setlocal noinfercase
-setlocal iskeyword=@,48-57,_,192-255,-
+setlocal iskeyword=@,48-57,_,192-255,$
 setlocal keywordprg=
 setlocal nolinebreak
 setlocal nolisp
@@ -988,8 +990,8 @@ setlocal nrformats=bin,octal,hex
 set number
 setlocal number
 setlocal numberwidth=4
-setlocal omnifunc=csscomplete#CompleteCSS
-setlocal path=
+setlocal omnifunc=javascriptcomplete#CompleteJS
+setlocal path=.,,
 setlocal nopreserveindent
 setlocal nopreviewwindow
 setlocal quoteescape=\\
@@ -1010,11 +1012,11 @@ setlocal spellfile=
 setlocal spelllang=en
 setlocal spelloptions=
 setlocal statusline=
-setlocal suffixesadd=
+setlocal suffixesadd=.js,.jsx,.es,.es6,.cjs,.mjs,.jsm,.vue,.json
 setlocal swapfile
 setlocal synmaxcol=3000
-if &syntax != 'css'
-setlocal syntax=css
+if &syntax != 'javascript'
+setlocal syntax=javascript
 endif
 setlocal tabstop=2
 setlocal tagcase=
@@ -1034,14 +1036,13 @@ setlocal nowinfixheight
 setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
-let s:l = 85 - ((1 * winheight(0) + 23) / 46)
+let s:l = 50 - ((22 * winheight(0) + 23) / 46)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 85
-normal! 014|
+keepjumps 50
+normal! 033|
 wincmd w
-2wincmd w
 exe 'vert 1resize ' . ((&columns * 89 + 89) / 179)
 exe 'vert 2resize ' . ((&columns * 89 + 89) / 179)
 tabnext 2
@@ -1059,6 +1060,7 @@ if filereadable(s:sx)
   exe "source " . fnameescape(s:sx)
 endif
 let &g:so = s:so_save | let &g:siso = s:siso_save
+nohlsearch
 doautoall SessionLoadPost
 unlet SessionLoad
 " vim: set ft=vim :

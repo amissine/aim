@@ -47,7 +47,7 @@ export default function Home() {
     Then see if you like it. Click here to join the discussion on Discord...
             </p>
           </a>
-          <Link href={'/posts/first-post'} className={styles.card}>
+          <Link href={'/shex-join'} className={styles.card}>
             <h3>Ok, How Do I Join? &rarr;</h3>
             <p>
     Add Stellar wallet to your browser, get the assets - and you're in! 
