@@ -1120,12 +1120,12 @@ setlocal nowinfixheight
 setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
-let s:l = 39 - ((32 * winheight(0) + 23) / 47)
+let s:l = 48 - ((41 * winheight(0) + 23) / 47)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 39
-normal! 014|
+keepjumps 48
+normal! 026|
 tabnext
 edit components/layout.module.css
 argglobal
