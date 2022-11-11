@@ -1,14 +1,15 @@
 import Head from 'next/head'
 import Link from 'next/link';
 import Script from 'next/script'
-import React from 'react'
+import { useEffect, useState } from 'react'
 import styles from './shex.module.css'
 
 export default function Home() {
-  React.useEffect(_ => console.log(
-    'React.useEffect', global?.window,
-    global?.window && window.freighterApi?.isConnected()
-  ))
+  const [q, setQ] = useState({ count: 0, })
+  useEffect(_ => setQ(p => Object.assign({}, p, {
+    connected: window.freighterApi?.isConnected(),
+    userAgent: window.navigator.userAgent,
+  })), [q.userAgent])
   return (
   <>
     <Head>
@@ -16,23 +17,23 @@ export default function Home() {
       <link rel="icon" href="/favicon.ico" />
     </Head>
     <Script
-      onError={e => console.error(
-        'onError',
-        e
-      )}
-      onLoad={_ => console.log(
-        'onLoad',
-        global?.window && window.freighterApi.isConnected()
-      )}
-      onReady={_ => console.log(
-        'onReady',
-        global?.window && window.freighterApi.isConnected()
-      )}
+      onError={e => setQ(p => Object.assign({}, p, { count: ++p.count, error: e }))}
+      onLoad={_ => {
+        let connected = window.freighterApi.isConnected()
+        setQ(p => Object.assign({}, p, { count: ++p.count, connected, }))
+      }}
+      onReady={_ => {
+        let connected = window.freighterApi.isConnected()
+        setQ(p => Object.assign({}, p, { count: ++p.count, connected, }))
+      }}
       src="https://cdnjs.cloudflare.com/ajax/libs/stellar-freighter-api/1.1.2/index.min.js"
       strategy="lazyOnload"
     />
+    <code>{JSON.stringify(q)}</code>
     <div className={styles.container}>
-
+      <p>
+        {q.userAgent?.includes('Mobile') ? 'Unsupported mobile device' : 'OK'}
+      </p>
     </div>
   </>
   )
