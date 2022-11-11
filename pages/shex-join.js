@@ -1,10 +1,16 @@
-import Head from 'next/head'
+import Head from 'next/head' // {{{1
 import Link from 'next/link';
 import Script from 'next/script'
 import { useEffect, useState } from 'react'
 import styles from './shex.module.css'
 
-export default function Home() {
+const addWallet = // {{{1
+<div>
+  Add{' '}<a href="https://www.freighter.app/" target="_blank">Freighter</a>{' '}
+  to your browser, set it up and add an account. Then come back and reload this page.
+</div>
+
+export default function Home() { // {{{1
   const [q, setQ] = useState({ count: 0, })
   useEffect(_ => setQ(p => Object.assign({}, p, {
     connected: window.freighterApi?.isConnected(),
@@ -29,11 +35,14 @@ export default function Home() {
       src="https://cdnjs.cloudflare.com/ajax/libs/stellar-freighter-api/1.1.2/index.min.js"
       strategy="lazyOnload"
     />
-    <code>{JSON.stringify(q)}</code>
     <div className={styles.container}>
-      <p>
-        {q.userAgent?.includes('Mobile') ? 'Unsupported mobile device' : 'OK'}
-      </p>
+      <div className={styles.title}>
+        {
+          q.error ? <code>{JSON.stringify(q.error)}</code>
+          : q.userAgent?.includes('Mobile') ? 'Unsupported mobile device' // TODO support
+          : q.connected ? 'OK' : q.count < 3 ? ' ' : addWallet
+        }
+      </div>
     </div>
   </>
   )
