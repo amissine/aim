@@ -40,7 +40,7 @@ export default function Home() { // {{{1
         {
           q.error ? <code>{JSON.stringify(q.error)}</code>
           : q.userAgent?.includes('Mobile') ? 'Unsupported mobile device' // TODO support
-          : q.connected ? 'OK' : q.count < 3 ? <code>{JSON.stringify(q)}</code>
+          : q.connected ? 'OK' //: q.count < 3 ? <code>{JSON.stringify(q)}</code>
           : addWallet
         }
       </div>

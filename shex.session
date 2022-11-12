@@ -67,7 +67,7 @@ badd +1 pages/sandbox/shex.module.css
 badd +1 pages/shex.module.css
 badd +1 pages/shex-join.js
 badd +1 ~/product/stellar/docs-wallet/readme.md
-badd +0 posts/add-wallet.md
+badd +1 posts/add-wallet.md
 argglobal
 %argdel
 $argadd package.json
@@ -1059,7 +1059,7 @@ if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
 keepjumps 43
-normal! 070|
+normal! 033|
 wincmd w
 argglobal
 if bufexists(fnamemodify("pages/shex.js", ":p")) | buffer pages/shex.js | else | edit pages/shex.js | endif
