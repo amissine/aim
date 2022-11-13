@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Script from 'next/script'
 import { useEffect, useState } from 'react'
 import styles from './shex.module.css'
+import { setup, teardown } from '../shex'
 
 const addWallet = // {{{1
 <div>
@@ -10,13 +11,17 @@ const addWallet = // {{{1
   to your browser, set it up and add an account. Then come back and reload this page.
 </div>
 
-export default function Home() { // {{{1
-  const [q, setQ] = useState({ count: 0, })
+export default function Join() { // {{{1
+  const [q, setQ] = useState({ count: 0, }) // {{{2
   useEffect(_ => setQ(p => Object.assign({}, p, {
     connected: window.freighterApi?.isConnected(),
     userAgent: window.navigator.userAgent,
   })), [q.userAgent])
-  return (
+  useEffect(_ => {
+    setup(q)
+    return _ => teardown(q);
+  }, [q.connected])
+  return ( // {{{2
   <>
     <Head>
       <title>Join Stellar HEX</title>
@@ -38,7 +43,7 @@ export default function Home() { // {{{1
     <div className={styles.container}>
       <div className={styles.title}>
         {
-          q.error ? <code>{JSON.stringify(q.error)}</code>
+          q.error ? <code>{JSON.stringify(q)}</code>
           : q.userAgent?.includes('Mobile') ? 'Unsupported mobile device' // TODO support
           : q.connected ? 'OK' //: q.count < 3 ? <code>{JSON.stringify(q)}</code>
           : addWallet
@@ -46,5 +51,6 @@ export default function Home() { // {{{1
       </div>
     </div>
   </>
-  )
+  ) // }}}2
 }
+// TODO hint: use https://www.npmjs.com/package/stellar-hd-wallet
