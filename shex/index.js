@@ -1,19 +1,24 @@
-import { stellarNetworks, } from '../foss/stellar-networks.js'
+import { stellarNetworks, } from '../foss/stellar-networks.js' // {{{1
 
-function setup (state) {
-  console.dir({ setup: true, state, }, { depth: null, })
+async function setup (state, setState) { // {{{1
   if (!state.connected) {
     return;
   }
+  console.log('setup start', state)
   const fapi = window.freighterApi
-  fapi.getPublicKey().then(pk => console.log('pk', pk))
-  fapi.getNetwork().then(network => console.log(
-    'network', network, stellarNetworks().filter(v => v.name == network)[0]
-  ))
+  let account
+  return await fapi.getPublicKey().then(pk => { 
+    account = pk 
+    return fapi.getNetwork();
+  }).then(name => {
+    let network = stellarNetworks().filter(v => v.name == name)[0].id
+    setState(p => Object.assign({}, p, { account, network }))
+  });
 }
 
-function teardown (state) {
-  console.dir({ teardown: true, state, }, { depth: null, })
+function teardown (state, setState) { // {{{1
+  console.log('teardown start', state)
 }
 
-export { setup, teardown, }
+export { setup, teardown, } // {{{1
+

@@ -11,15 +11,25 @@ const addWallet = // {{{1
   to your browser, set it up and add an account. Then come back and reload this page.
 </div>
 
+function walletAdded (network, account) { // {{{1
+  return (
+<div>
+  <code>
+    Connected to {network} account {account}.
+  </code>
+</div>
+  );
+}
+
 export default function Join() { // {{{1
-  const [q, setQ] = useState({ count: 0, }) // {{{2
+  const [q, setQ] = useState({ count: 0, }) // TODO remove count when done debugging {{{2
   useEffect(_ => setQ(p => Object.assign({}, p, {
     connected: window.freighterApi?.isConnected(),
     userAgent: window.navigator.userAgent,
-  })), [q.userAgent])
+  })), [q.connected, q.userAgent])
   useEffect(_ => {
-    setup(q)
-    return _ => teardown(q);
+    setup(q, setQ)
+    return _ => teardown(q, setQ);
   }, [q.connected])
   return ( // {{{2
   <>
@@ -45,7 +55,8 @@ export default function Join() { // {{{1
         {
           q.error ? <code>{JSON.stringify(q)}</code>
           : q.userAgent?.includes('Mobile') ? 'Unsupported mobile device' // TODO support
-          : q.connected ? 'OK' //: q.count < 3 ? <code>{JSON.stringify(q)}</code>
+          : q.connected ? //: q.count < 3 ? <code>{JSON.stringify(q)}</code>
+            q.account ? walletAdded(q.network, q.account) : 'OK'
           : addWallet
         }
       </div>
