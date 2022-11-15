@@ -71,7 +71,7 @@ badd +1 posts/add-wallet.md
 badd +1 posts/add-wallet-fixed.md
 badd +1 shex/index.js
 badd +1 foss/stellar-networks.js
-badd +0 local.js
+badd +1 local.js
 argglobal
 %argdel
 $argadd package.json
@@ -244,7 +244,7 @@ setlocal nowinfixheight
 setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
-let s:l = 31 - ((30 * winheight(0) + 23) / 46)
+let s:l = 31 - ((0 * winheight(0) + 23) / 46)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
@@ -374,7 +374,7 @@ setlocal nowinfixheight
 setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
-let s:l = 65 - ((22 * winheight(0) + 11) / 23)
+let s:l = 65 - ((0 * winheight(0) + 11) / 23)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
@@ -504,7 +504,7 @@ setlocal nowinfixheight
 setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
-let s:l = 24 - ((14 * winheight(0) + 11) / 22)
+let s:l = 24 - ((0 * winheight(0) + 11) / 22)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
@@ -894,12 +894,12 @@ setlocal nowinfixheight
 setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
-let s:l = 1 - ((0 * winheight(0) + 7) / 14)
+let s:l = 16 - ((12 * winheight(0) + 7) / 14)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 1
-normal! 0
+keepjumps 16
+normal! 027|
 wincmd w
 exe 'vert 1resize ' . ((&columns * 29 + 89) / 178)
 exe '2resize ' . ((&lines * 23 + 24) / 49)
@@ -1073,11 +1073,15 @@ setlocal nowinfixheight
 setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
-let s:l = 23 - ((22 * winheight(0) + 11) / 23)
+3
+normal! zo
+8
+normal! zo
+let s:l = 13 - ((12 * winheight(0) + 11) / 23)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 23
+keepjumps 13
 normal! 0
 wincmd w
 argglobal
@@ -1207,12 +1211,18 @@ setlocal wrapmargin=0
 normal! zo
 25
 normal! zo
-let s:l = 25 - ((24 * winheight(0) + 11) / 22)
+26
+normal! zo
+30
+normal! zo
+35
+normal! zo
+let s:l = 26 - ((25 * winheight(0) + 11) / 22)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 25
-normal! 0
+keepjumps 26
+normal! 064|
 wincmd w
 argglobal
 if bufexists(fnamemodify("local.js", ":p")) | buffer local.js | else | edit local.js | endif
@@ -1339,12 +1349,12 @@ setlocal wrap
 setlocal wrapmargin=0
 2
 normal! zo
-let s:l = 18 - ((14 * winheight(0) + 7) / 15)
+let s:l = 1 - ((0 * winheight(0) + 7) / 15)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 18
-normal! 02|
+keepjumps 1
+normal! 0
 wincmd w
 argglobal
 if bufexists(fnamemodify("foss/stellar-networks.js", ":p")) | buffer foss/stellar-networks.js | else | edit foss/stellar-networks.js | endif
@@ -1469,12 +1479,12 @@ setlocal nowinfixheight
 setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
-let s:l = 13 - ((0 * winheight(0) + 7) / 15)
+let s:l = 22 - ((6 * winheight(0) + 7) / 15)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 13
-normal! 075|
+keepjumps 22
+normal! 072|
 wincmd w
 argglobal
 if bufexists(fnamemodify("pages/shex.js", ":p")) | buffer pages/shex.js | else | edit pages/shex.js | endif

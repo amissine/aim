@@ -23,14 +23,15 @@ function walletAdded (network, account) { // {{{1
 
 export default function Join() { // {{{1
   const [q, setQ] = useState({ count: 0, }) // TODO remove count when done debugging {{{2
-  useEffect(_ => setQ(p => Object.assign({}, p, {
+  useEffect(_ => setQ(p => Object.assign({}, p, { // connected, userAgent {{{3
     connected: window.freighterApi?.isConnected(),
     userAgent: window.navigator.userAgent,
   })), [q.connected, q.userAgent])
-  useEffect(_ => {
+  useEffect(_ => { // connected, network, sdk, server {{{3
     setup(q, setQ)
     return _ => teardown(q, setQ);
-  }, [q.connected])
+  }, [q.connected, q.network, q.sdk, q.server])
+  // }}}3
   return ( // {{{2
   <>
     <Head>
@@ -50,13 +51,24 @@ export default function Join() { // {{{1
       src="https://cdnjs.cloudflare.com/ajax/libs/stellar-freighter-api/1.1.2/index.min.js"
       strategy="lazyOnload"
     />
+    <Script
+      onError={e => setQ(p => Object.assign({}, p, { count: ++p.count, error: e }))}
+      onLoad={_ => !!window.StellarSdk && !q.sdk &&
+        setQ(p => Object.assign({}, p, { count: ++p.count, sdk: window.StellarSdk, }))
+      }
+      onReady={_ => !!window.StellarSdk && !q.sdk &&
+        setQ(p => Object.assign({}, p, { count: ++p.count, sdk: window.StellarSdk, }))
+      }
+      src="https://cdnjs.cloudflare.com/ajax/libs/stellar-sdk/10.4.0/stellar-sdk.js"
+      strategy="lazyOnload"
+    />
     <div className={styles.container}>
       <div className={styles.title}>
         {
           q.error ? <code>{JSON.stringify(q)}</code>
           : q.userAgent?.includes('Mobile') ? 'Unsupported mobile device' // TODO support
           : q.connected ? //: q.count < 3 ? <code>{JSON.stringify(q)}</code>
-            q.account ? walletAdded(q.network, q.account) : 'OK'
+            q.account ? walletAdded(q.network.id, q.account) : 'OK'
           : addWallet
         }
       </div>
