@@ -244,12 +244,12 @@ setlocal nowinfixheight
 setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
-let s:l = 31 - ((0 * winheight(0) + 23) / 46)
+let s:l = 1 - ((0 * winheight(0) + 23) / 46)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 31
-normal! 08|
+keepjumps 1
+normal! 0
 wincmd w
 argglobal
 if bufexists(fnamemodify("pages/shex.module.css", ":p")) | buffer pages/shex.module.css | else | edit pages/shex.module.css | endif
@@ -894,13 +894,14 @@ setlocal nowinfixheight
 setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
-let s:l = 16 - ((12 * winheight(0) + 7) / 14)
+let s:l = 15 - ((11 * winheight(0) + 7) / 14)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 16
-normal! 027|
+keepjumps 15
+normal! 028|
 wincmd w
+6wincmd w
 exe 'vert 1resize ' . ((&columns * 29 + 89) / 178)
 exe '2resize ' . ((&lines * 23 + 24) / 49)
 exe 'vert 2resize ' . ((&columns * 86 + 89) / 178)
@@ -1077,7 +1078,7 @@ setlocal wrapmargin=0
 normal! zo
 8
 normal! zo
-let s:l = 13 - ((12 * winheight(0) + 11) / 23)
+let s:l = 13 - ((0 * winheight(0) + 11) / 23)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
@@ -1616,7 +1617,6 @@ normal! zt
 keepjumps 1
 normal! 0
 wincmd w
-2wincmd w
 exe '1resize ' . ((&lines * 23 + 24) / 49)
 exe 'vert 1resize ' . ((&columns * 95 + 89) / 178)
 exe '2resize ' . ((&lines * 22 + 24) / 49)
@@ -2329,7 +2329,7 @@ exe 'vert 1resize ' . ((&columns * 88 + 89) / 178)
 exe '2resize ' . ((&lines * 22 + 24) / 49)
 exe 'vert 2resize ' . ((&columns * 88 + 89) / 178)
 exe 'vert 3resize ' . ((&columns * 89 + 89) / 178)
-tabnext 2
+tabnext 1
 set stal=1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0
   silent exe 'bwipe ' . s:wipebuf
