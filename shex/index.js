@@ -1,17 +1,38 @@
 import { stellarNetworks, } from '../foss/stellar-networks.js' // {{{1
+import { Account, } from '../foss/stellar-account.js'
 
 async function setup (state, setState) { // {{{1
   if (!state.connected) { // {{{2
     return;
-  }
+  } // }}}2
   console.log('setup start', state)
   if (state.network) { // {{{2
     if (!state.sdk) {
       return;
     }
     if (state.server) {
-      console.log('TODO continue')
-      return;
+      /* // {{{3
+      await state.server.accounts().accountId(state.account).call().then(found => {
+        setState(p => Object.assign({}, p, { found }))
+      })
+      */
+      await state.server.loadAccount(state.account).then(async loaded => { // {{{3
+        setState(p => Object.assign({}, p, { loaded }))
+        let user = new Account(
+          { loaded, network: state.network, wallet: window.freighterApi }
+        )
+        console.log('user loaded', user)
+
+        if (user.trusts(state.network.hex.assets)) {
+          return;
+        }
+        console.log('TODO make user trust HEX assets')
+
+        for (let asset of state.network.hex.assets) {
+          await user.trust(asset)
+        }
+      })
+      return; // }}}3
     }
     let server = new state.sdk.Server(state.network.url)
     setState(p => {

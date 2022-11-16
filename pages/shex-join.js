@@ -29,7 +29,7 @@ export default function Join() { // {{{1
   })), [q.connected, q.userAgent])
   useEffect(_ => { // connected, network, sdk, server {{{3
     setup(q, setQ)
-    return _ => teardown(q, setQ);
+    //return _ => teardown(q, setQ);
   }, [q.connected, q.network, q.sdk, q.server])
   // }}}3
   return ( // {{{2
@@ -68,7 +68,10 @@ export default function Join() { // {{{1
           q.error ? <code>{JSON.stringify(q)}</code>
           : q.userAgent?.includes('Mobile') ? 'Unsupported mobile device' // TODO support
           : q.connected ? //: q.count < 3 ? <code>{JSON.stringify(q)}</code>
-            q.account ? walletAdded(q.network.id, q.account) : 'OK'
+            q.account ? 
+              q.loaded ? <code>{JSON.stringify(q.loaded.balances.length)}</code>
+              : walletAdded(q.network.id, q.account) 
+            : 'OK'
           : addWallet
         }
       </div>
