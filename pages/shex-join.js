@@ -48,7 +48,7 @@ export default function Join() { // {{{1
         let connected = window.freighterApi.isConnected()
         setQ(p => Object.assign({}, p, { count: ++p.count, connected, }))
       }}
-      src="https://cdnjs.cloudflare.com/ajax/libs/stellar-freighter-api/1.1.2/index.min.js"
+      src="https://cdnjs.cloudflare.com/ajax/libs/stellar-freighter-api/1.3.1/index.min.js"
       strategy="lazyOnload"
     />
     <Script
